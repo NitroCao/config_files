@@ -1,0 +1,23 @@
+!!=======================================
+!! RXVT-unicode settings
+!!=======================================
+!set font resolution
+Xft.dpi: 96
+!set font
+URxvt.font: xft:AnonymicePowerline Nerd Font:size=14
+!set color
+Rxvt.depth: 32
+Rxvt.background: rgba:0000/0000/0000/5cc0
+Rxvt.foreground: white
+Rxvt.colorDB: yellow
+Rxvt.colorUL: green
+!set Scroll
+Rxvt.scrollBar: False
+!set screen buffer
+Rxvt.savelines: 10000
+Rxvt.color12: DodgerBlue
+Rxvt.menu: /etc/X11/rxvt.menu
+!input method
+inputMethod: fcitx
+!Rxvt.title: "JayceCao's URxvt"
+Rxvt.borderless: True
