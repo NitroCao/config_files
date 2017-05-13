@@ -4,7 +4,7 @@ XTerm.vt100.savelines: 4096
 XTerm.vt100.foreground: white
 XTerm.vt100.background: black
 XTerm.vt100.faceName: TerminessTTF Nerd Font:size=14:antialias=true
-XTerm.vt100.faceNameDoublesize: wqy-zenhei
+XTerm.vt100.faceNameDoublesize: WenQuanYi Zen Hei Mono
 XTerm.vt100.faceSize: 12
 XTerm.vt100.transparent: true
 XTerm.vt100.metaSendsEscape: true
