@@ -1,0 +1,43 @@
+-- ===================================================================
+--                            conky_bar
+-- Date    : 12/12/2015
+-- Author  : Allen_Qiu
+-- Version : v1.1
+--
+-- 这份配置文件适用于conky1.10之后版本
+-- conky1.10之后配置文档采用lua语法
+-- ===================================================================
+
+conky.config = {
+
+    -- 不输出到X
+    out_to_x = false,
+    out_to_console = true,
+    background = false,
+    double_buffer = false,
+    -- 刷新时间
+    update_interval = 1,
+    -- 运行时间，0为一直运行
+    total_run_times = 0,
+    -- 强制uft8编码，需xft支持
+    override_utf8_locale = false,
+    -- 缩写字符单位
+    short_units = true,
+    -- 监视端口
+    if_up_strictness = 'address',
+    -- cpu数据监测模式，一般选2
+    cpu_avg_samples = 2
+
+}
+
+conky.text = [[
+ ${upspeed wlp3s0}/s  ${downspeed wlp3s0}/s  \
+ ${addr wlp3s0} \
+ ${cpu cpu0}% \
+ ${mem} \
+ ${fs_used /} \
+ ${battery_percent}% \
+${execi 1 amixer | grep -A10 'Master' | sed -rn 's/.*\[([0-9]+%)\].*\[(on|off)\]/\2 \1/p' | sed -n '1p' | sed 's/off.*/ /' | sed -r 's/on( [01234]?[0-9]%)/\1/' | sed -r 's/(on|) 0%/ 0%/' | sed -r 's/on//'} \
+ ${time %a %d %m, %Y} \
+ ${time %H:%M:%S} \
+]]

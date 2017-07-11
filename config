@@ -10,25 +10,92 @@ set $mod Mod4
 ###########################################################################
 #                       autostart program
 # Tray icons
-exec --no-startup-id nm-applet
+exec --no-startup-id nitrogen --restore; sleep 1;
+exec --no-startup-id compton --config ~/.config/i3/compton.conf -b
 # Power managment
-exec --no-startup-id meta-power-manager
+exec --no-startup-id mate-power-manager
+#exec --no-startup-id redshift-gtk -l 40.14:116.27
+exec --no-startup-id dunst
 ###########################################################################
 # Windows title and applications font
-font pango:DejaVuSans 12
+font pango:Monaco for Powerline 10
 
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
-# Shortcuts for starting programs quickly
-bindsym $mod+Return exec urxvt
-bindsym $mod+c exec google-chrome-stable
-bindsym $mod+v exec vim
-bindsym --release $mod+Print exec scrot -s
+# Automaatci back-and-forth when switching to the current workspace
+workspace_auto_back_and_forth yes
 
-# open a new window without a window border
-new_window 1pixel
+# Shortcuts for starting programs quickly
+bindsym $mod+Return exec terminator
+bindsym $mod+c exec google-chrome-stable
+bindsym --release $mod+Print exec scrot -q 100 -s $HOME/Screenshots/`date +%Y-%m-%d_%H:%M:%S`.png
+
+# set windows' gaps
+for_window [class="^.*"] border pixel 0
+gaps inner 10
+gaps outer 10
+
+for_window [class="Nitrogen"] floating enable sticky enable border normal
+for_window [class="(?i)virtualbox"] floating enable normal
+for_window [class="TelegramDesktop"] floating enable normal
+for_window [class="Lxappearance"] floating enable sticky normal
+for_window [class="obs"] floating enable sticky normal
+for_window [class="Gvim"] floating enable sticky normal
+for_window [class="netease-cloud-music"] floating enable sticky normal
+
+set $mode_gaps Gaps: (o) outer, (i) inner
+set $mode_gaps_outer Outer Gaps: +|-|0 (local), Shift + +|-|0 (global)
+set $mode_gaps_inner Inner Gaps: +|-|0 (local), Shift + +|-|0 (global)
+bindsym $mod+Shift+g mode "$mode_gaps"
+
+# windows         Border    Background    Text     Indicator
+client.focused    #1793d1   #1793d1       #ffffff
+client.unfocused  #2f343f   #2f343f       #ffffff
+
+# define colors used
+set $bg-color 	         #2f343f
+set $inactive-bg-color   #2f343f
+set $text-color          #f3f4f5
+set $inactive-text-color #676E7D
+set $urgent-bg-color     #5294e2
+
+mode "$mode_gaps" {
+        bindsym o      mode "$mode_gaps_outer"
+        bindsym i      mode "$mode_gaps_inner"
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+mode "$mode_gaps_inner" {
+        bindsym plus  gaps inner current plus 5
+        bindsym minus gaps inner current minus 5
+        bindsym 0     gaps inner current set 0
+
+        bindsym Shift+plus  gaps inner all plus 5
+        bindsym Shift+minus gaps inner all minus 5
+        bindsym Shift+0     gaps inner all set 0
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+mode "$mode_gaps_outer" {
+        bindsym plus  gaps outer current plus 5
+        bindsym minus gaps outer current minus 5
+        bindsym 0     gaps outer current set 0
+
+        bindsym Shift+plus  gaps outer all plus 5
+        bindsym Shift+minus gaps outer all minus 5
+        bindsym Shift+0     gaps outer all set 0
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+# hide or show a window
+bindSym $mod+minus move scratchpad
+bindSym $mod+plus scratchpad show
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -77,34 +144,41 @@ bindsym $mod+e layout toggle split
 # toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
 
+# move floating window
+mode "movefw" {
+    bindsym k move up 20px
+    bindsym h move left 20px
+    bindsym j move down 20px
+    bindsym l move right 20px
+    bindsym $mod+m mode "default"
+}
+bindsym $mod+m focus floating; mode "movefw"
+
 # change focus between tiling / floating windows
 bindsym $mod+space focus mode_toggle
 
 # focus the parent container
 bindsym $mod+a focus parent
 
-# focus the child container
-#bindsym $mod+d focus child
-
 # switch to workspace
-bindsym $mod+1 workspace 1: VIM
-bindsym $mod+2 workspace 2: XTerm
-bindsym $mod+3 workspace 3: Chrome
-bindsym $mod+4 workspace 4: NetEase-Music
-bindsym $mod+5 workspace 5
-bindsym $mod+6 workspace 6
+bindsym $mod+1 workspace 1: 
+bindsym $mod+2 workspace 2: 
+bindsym $mod+3 workspace 3: 
+bindsym $mod+4 workspace 4: 
+bindsym $mod+5 workspace 5: 
+bindsym $mod+6 workspace 6: 
 bindsym $mod+7 workspace 7
 bindsym $mod+8 workspace 8
 bindsym $mod+9 workspace 9
 bindsym $mod+0 workspace 10
 
 # move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace 1
-bindsym $mod+Shift+2 move container to workspace 2: XTerm
-bindsym $mod+Shift+3 move container to workspace 3: Chrome
-bindsym $mod+Shift+4 move container to workspace 4: NetEase-Music
-bindsym $mod+Shift+5 move container to workspace 5
-bindsym $mod+Shift+6 move container to workspace 6
+bindsym $mod+Shift+1 move container to workspace 1: 
+bindsym $mod+Shift+2 move container to workspace 2: 
+bindsym $mod+Shift+3 move container to workspace 3: 
+bindsym $mod+Shift+4 move container to workspace 4: 
+bindsym $mod+Shift+5 move container to workspace 5: 
+bindsym $mod+Shift+6 move container to workspace 6: 
 bindsym $mod+Shift+7 move container to workspace 7
 bindsym $mod+Shift+8 move container to workspace 8
 bindsym $mod+Shift+9 move container to workspace 9
@@ -131,10 +205,10 @@ mode "resize" {
         bindsym semicolon resize grow width 10 px or 10 ppt
 
         # same bindings, but for the arrow keys
-        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Right resize shrink width 10 px or 10 ppt
         bindsym Down resize grow height 10 px or 10 ppt
         bindsym Up resize shrink height 10 px or 10 ppt
-        bindsym Right resize grow width 10 px or 10 ppt
+        bindsym Left resize grow width 10 px or 10 ppt
 
         # back to normal: Enter or Escape
         bindsym Return mode "default"
@@ -147,7 +221,8 @@ bindsym $mod+r mode "resize"
 ###########################################################################################################
 #                                   Power Managment
 # Use i3lock to lock screen. The background color of lock screen is #111111
-set $Locker i3lock -c "#111111" && sleep 1
+#set $Locker i3lock -c "#111111" && sleep 1
+set $Locker i3lock -t -i ~/Pictures/pink_floyid.png && sleep 1
 set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
 mode "$mode_system" {
     bindsym l exec --no-startup-id $Locker, mode "default"
@@ -165,28 +240,37 @@ bindsym $mod+Pause mode "$mode_system"
 ############################################################################################################
 
 ############################################################################################################
-#                                   Volume and Brightness Managment
+#                                   Volume Managment
 bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -q set Master 2dB+ unmute
 bindsym XF86AudioLowerVolume exec --no-startup-id amixer -q set Master 2dB- unmute
 bindsym XF86AudioMute exec --no-startup-id amixer -q set Master toggle
-bindsym XF86MonBrightnessDown exec --no-startup-id ~/.brightness_down.sh
-bindsym XF86MonBrightnessUp exec --no-startup-id ~/.brightness_up.sh
 ############################################################################################################
+
+# shortcuts for Moc music player
+# the previous song
+bindsym XF86AudioPrev exec --no-startup-id mocp -r
+# the next song
+bindsym XF86AudioNext exec --no-startup-id mocp -f
+# toggle between play and pause
+bindsym XF86AudioPlay exec --no-startup-id mocp -G
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
         # The i3bar is on top
         position top
-        font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
-        status_command i3blocks -c ~/.config/i3/i3blocks.conf
+        status_command conky -c  $HOME/.config/i3/conkyrc_bar
         # Set the transparent i3bar
         i3bar_command i3bar -t
+        font pango:Monaco for Powerline 10;wqy-zenhei 10
 
         colors {
             # Set the background color of i3bar
+            focused_workspace  $bg-color          $bg-color          $text-color
+            inactive_workspace $inactive-bg-color $inactive-bg-color $inactive-text-color
+            urgent_workspace   $urgent-bg-color   $urgent-bg-color   $text-color
             background #10101000
             # Set the color of i3bar's text
-            statusline #000000FF
+            statusline #7f14ad
         }
 }
