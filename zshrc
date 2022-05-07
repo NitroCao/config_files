@@ -120,8 +120,8 @@ if [ "$(get_os)" = "${OS_LINUX}" ]; then
     fzf_key_bindings=/usr/share/fzf/key-bindings.zsh
     fzf_completion=/usr/share/fzf/completion.zsh
 else
-    fzf_key_bindings=/usr/local/opt/fzf/key-bindings.zsh
-    fzf_completion=/usr/local/opt/fzf/completion.zsh
+    fzf_key_bindings=/usr/local/opt/fzf/shell/key-bindings.zsh
+    fzf_completion=/usr/local/opt/fzf/shell/completion.zsh
 fi
 
 source "${fzf_key_bindings}"
