@@ -1,0 +1,43 @@
+{
+  "coc.preferences.currentFunctionSymbolAutoUpdate": true,
+  "pyright.organizeimports.provider": "isort",
+  "python.formatting.provider": "black",
+  "python.formatting.blackArgs": [
+    "--line-length",
+    "88"
+  ],
+  "python.linting.pylintEnabled": true,
+  "languageserver": {
+    "bash": {
+      "command": "bash-language-server",
+      "filetypes": [
+        "sh"
+      ],
+      "args": [
+        "start"
+      ]
+    },
+    "cmake": {
+      "command": "cmake-language-server",
+      "filetypes": [
+        "cmake"
+      ],
+      "rootPatterns": [
+        ".git",
+        "build/"
+      ],
+      "initializationOptions": {
+        "buildDirectory": ".build"
+      }
+    },
+    "dockerfile": {
+      "command": "docker-langserver",
+      "filetypes": [
+        "dockerfile"
+      ],
+      "args": [
+        "--stdio"
+      ]
+    }
+  }
+}
