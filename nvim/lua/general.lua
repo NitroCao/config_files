@@ -99,7 +99,7 @@ augroup group1
     autocmd!
 
     autocmd FileType yaml,json setlocal shiftwidth=2 softtabstop=2 tabstop=2
-    autocmd BufWritePre *.py,*.go,*.json,*.yml,*.yaml call CocAction('format')
+    autocmd BufWritePre *.py,*.go,*.json,*.yml,*.yaml :silent! call CocAction('format')
     autocmd BufWritePre *.go,*.py :silent! call CocAction('runCommand', 'editor.action.organizeImport')
     autocmd BufWritePre *.py :silent! call CocAction('runCommand', 'python.sortImports')
 augroup END
