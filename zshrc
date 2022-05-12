@@ -1,9 +1,26 @@
 OS_MAC="Darwin"
 OS_LINUX="Linux"
+OS_CENTOS="CentOS Linux"
 
 get_os() {
-    uname
+    if [ -f /etc/os-release ]; then
+        source /etc/os-release
+    fi
+    if [ -n "${NAME}" ]; then
+        echo "${NAME}"
+    else
+        uname
+    fi
 }
+
+test -d /home/linuxbrew/.linuxbrew && \
+    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+if command -v brew >/dev/null; then
+    eval "$(brew shellenv)"
+fi
+if [ -z "${HOMEBREW_PREFIX}" ]; then
+    HOMEBREW_PREFIX=/usr
+fi
 
 # general environment variables
 export PATH=$HOME/.local/bin:$HOME/go/bin:$PATH
@@ -24,7 +41,7 @@ fi
 
 ######################################################
 # initialize zsh related configuration
-if [ "$(get_os)" = "${OS_MAC}" ]; then
+if [ "$(get_os)" = "${OS_MAC}" ] || [ "$(get_os)" = "${OS_CENTOS}" ]; then
     ZSH="${HOME}/.oh-my-zsh"
 else
     ZSH="/usr/share/oh-my-zsh"
@@ -36,10 +53,8 @@ source $ZSH/oh-my-zsh.sh
 
 # load extra zsh completions on macOS
 # install zsh-completions first
-if [ "$(get_os)" = "${OS_MAC}" ]; then
-    if type brew &>/dev/null; then
-        FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
-    fi
+if type brew &>/dev/null; then
+    FPATH="${HOMEBREW_PREFIX}"/share/zsh-completions:$FPATH
 fi
 
 
@@ -52,18 +67,13 @@ SPACESHIP_TIME_SHOW=true
 SPACESHIP_TIME_FORMAT="%D %T"
 SPACESHIP_DOCKER_SHOW=false
 
-if [ "$(get_os)" = "${OS_MAC}" ]; then
-    zsh_autosuggestions=/usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-    zsh_syntax_highhightling=/usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-else
-    zsh_autosuggestions=/usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-    zsh_syntax_highhightling=/usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+ZSH_AUTOSUGGESTIONS="${HOMEBREW_PREFIX}"/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+ZSH_SYNTAX_HIGHHIGHTLING="${HOMEBREW_PREFIX}"/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+if [ -f "${ZSH_AUTOSUGGESTIONS}" ]; then
+    source "${ZSH_AUTOSUGGESTIONS}"
 fi
-if [ -f "${zsh_autosuggestions}" ]; then
-    source "${zsh_autosuggestions}"
-fi
-if [ -f "${zsh_syntax_highhightling}" ]; then
-    source "${zsh_syntax_highhightling}"
+if [ -f "${ZSH_SYNTAX_HIGHHIGHTLING}" ]; then
+    source "${ZSH_SYNTAX_HIGHHIGHTLING}"
 fi
 ######################################################
 
@@ -120,8 +130,8 @@ if [ "$(get_os)" = "${OS_LINUX}" ]; then
     fzf_key_bindings=/usr/share/fzf/key-bindings.zsh
     fzf_completion=/usr/share/fzf/completion.zsh
 else
-    fzf_key_bindings=/usr/local/opt/fzf/shell/key-bindings.zsh
-    fzf_completion=/usr/local/opt/fzf/shell/completion.zsh
+    fzf_key_bindings="${HOMEBREW_PREFIX}"/opt/fzf/shell/key-bindings.zsh
+    fzf_completion="${HOMEBREW_PREFIX}"/opt/fzf/shell/completion.zsh
 fi
 
 source "${fzf_key_bindings}"
@@ -131,10 +141,10 @@ source "${fzf_completion}"
 
 ######################################################
 # initialize vcpkg
-if [ "$(get_os)" = "${OS_MAC}" ]; then
-    export VCPKG_ROOT="${HOME}/.vcpkg/vcpkg"
-else
+if [ "$(get_os)" = "${OS_LINUX}" ]; then
     source /opt/vcpkg/scripts/vcpkg_completion.zsh
+else
+    export VCPKG_ROOT="${HOME}/.vcpkg/vcpkg"
 fi
 ######################################################
 

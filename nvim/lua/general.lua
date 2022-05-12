@@ -24,7 +24,12 @@ vim.cmd([[
     hi clear SignColumn
     hi CursorLineNr guifg=Red
 ]])
-vim.g.python3_host_prog = '/usr/bin/python3'
+
+if os.getenv('HOMEBREW_PREFIX') == '' then
+    vim.g.python3_host_prog = '/usr/bin/python3'
+else
+    vim.g.python3_host_prog = os.getenv('HOMEBREW_PREFIX') .. '/bin/python3'
+end
 
 vim.api.nvim_set_keymap('n', '<Leader>q', ':q<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<Leader>ww', ':w<CR>', { noremap = true, silent = true })
