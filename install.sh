@@ -42,11 +42,37 @@ install_zsh() {
 main() {
     echo "Start installing..."
 
-    echo "Setup nvim..."
-    install_nvim || exit 1
+    if [ -n "${ENABLE_NVIM}" ]; then
+        echo "Setup nvim..."
+        install_nvim || exit 1
+    fi
 
-    echo "Setup zsh..."
-    install_zsh || exit 1
+    if [ -n "${ENABLE_ZSH}" ]; then
+        echo "Setup zsh..."
+        install_zsh || exit 1
+    fi
 }
+
+while [[ $# -gt 0 ]]; do
+    case $1 in
+        --with-nvim)
+            ENABLE_NVIM=ON
+            shift
+            ;;
+        --with-zsh)
+            ENABLE_ZSH=ON
+            shift
+            ;;
+        --*)
+            >&2 echo "Unknown option $1"
+            exit 1
+            ;;
+    esac
+done
+
+if [[ $# -eq 0 ]]; then
+    ENABLE_NVIM=ON
+    ENABLE_ZSH=ON
+fi
 
 main
