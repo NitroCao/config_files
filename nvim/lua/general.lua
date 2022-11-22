@@ -88,8 +88,9 @@ vim.g['coc_global_extensios'] = {
 }
 
 vim.api.nvim_set_keymap('n', 'K', [[ <Cmd>lua show_documentation()<CR> ]], { noremap = true, silent = true })
-vim.api.nvim_set_keymap('i', '<Tab>', 'pumvisible() ? "<C-n>" : v:lua.check_back_space() ? "<Tab>" : coc#refresh()', { noremap = true, expr = true })
-vim.api.nvim_set_keymap('i', '<CR>', 'complete_info()["selected"] != "-1" ? "<C-y>" : "<C-g>u<CR>"', { noremap = true, expr = true })
+vim.api.nvim_set_keymap("i", "<TAB>", 'coc#pum#visible() ? coc#pum#next(1) : v:lua.check_back_space() ? "<TAB>" : coc#refresh()', { noremap = true, silent = true, expr = true })
+vim.api.nvim_set_keymap("i", "<S-TAB>", [[coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"]], { noremap = true, silent = true, expr = true })
+vim.api.nvim_set_keymap("i", "<cr>", [[coc#pum#visible() ? coc#pum#confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"]], { noremap = true, silent = true, expr = true })
 vim.api.nvim_set_keymap('n', 'g[', '<Plug>(coc-diagnostic-prev)', { silent = true })
 vim.api.nvim_set_keymap('n', 'g]', '<Plug>(coc-diagnostic-next)', { silent = true })
 vim.api.nvim_set_keymap('n', 'gd', '<Plug>(coc-definition)', {})
