@@ -27,9 +27,9 @@ export PATH=$HOME/.local/bin:$HOME/go/bin:$PATH
 export LANG=en_US.UTF-8
 export LC_ALL=$LANG
 export TERM=xterm-256color
-export HTTP_PROXY=http://127.0.0.1:1080
-export HTTPS_PROXY=http://127.0.0.1:1080
-export NO_PROXY=127.0.0.1,localhost
+# export HTTP_PROXY=http://127.0.0.1:1080
+# export HTTPS_PROXY=http://127.0.0.1:1080
+# export NO_PROXY=127.0.0.1,localhost
 if command -v nvim >/dev/null; then
     export EDITOR=nvim
 elif command -v vim >/dev/null; then
