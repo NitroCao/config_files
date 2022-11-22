@@ -157,3 +157,14 @@ require('gitsigns').setup{}
 require('material').setup({
     lualine_style = 'default'
 })
+
+require('telescope').setup({
+    extensions = {
+        coc = {
+            theme = 'ivy',
+            prefer_locations = true,
+        }
+    },
+})
+require('telescope').load_extension('coc')
+

@@ -5,6 +5,8 @@ vim.cmd([[
     augroup end
 ]])
 return require('packer').startup(function()
+    use { 'nvim-telescope/telescope.nvim', tag = '0.1.0' }
+    use { 'fannheyward/telescope-coc.nvim' }
     use { 'wbthomason/packer.nvim' }
     use { 'Yggdroot/Leaderf', run = ':LeaderfInstallCExtension' }
     use { 'nvim-lualine/lualine.nvim', requires = { 'kyazdani42/nvim-web-devicons', opt = true } }
