@@ -5,6 +5,7 @@ vim.cmd([[
     augroup end
 ]])
 return require('packer').startup(function()
+    use { 'fatih/vim-go' }
     use { 'nvim-telescope/telescope.nvim', tag = '0.1.0' }
     use { 'fannheyward/telescope-coc.nvim' }
     use { 'wbthomason/packer.nvim' }
