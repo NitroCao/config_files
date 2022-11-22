@@ -17,19 +17,6 @@
         "start"
       ]
     },
-    "cmake": {
-      "command": "cmake-language-server",
-      "filetypes": [
-        "cmake"
-      ],
-      "rootPatterns": [
-        ".git",
-        "build/"
-      ],
-      "initializationOptions": {
-        "buildDirectory": ".build"
-      }
-    },
     "dockerfile": {
       "command": "docker-langserver",
       "filetypes": [
