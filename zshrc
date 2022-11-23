@@ -133,10 +133,9 @@ fi
 
 ######################################################
 # initialize fzf
-if [ "$(get_os)" = "${OS_LINUX}" ]; then
-    fzf_key_bindings=/usr/share/fzf/key-bindings.zsh
-    fzf_completion=/usr/share/fzf/completion.zsh
-else
+fzf_key_bindings=/usr/share/fzf/key-bindings.zsh
+fzf_completion=/usr/share/fzf/completion.zsh
+if [[ -z "${HOMEBREW_PREFIX}" ]]; then
     fzf_key_bindings="${HOMEBREW_PREFIX}"/opt/fzf/shell/key-bindings.zsh
     fzf_completion="${HOMEBREW_PREFIX}"/opt/fzf/shell/completion.zsh
 fi
