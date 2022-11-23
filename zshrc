@@ -18,7 +18,7 @@ test -d /home/linuxbrew/.linuxbrew && \
 if command -v brew >/dev/null; then
     eval "$(brew shellenv)"
 fi
-if [ -z "${HOMEBREW_PREFIX}" ]; then
+if [ -z "${HOMEBREW_PREFIX+x}" ]; then
     HOMEBREW_PREFIX=/usr
 fi
 
@@ -60,7 +60,7 @@ fi
 
 # initialize spaceship theme
 SPACESHIP_LOCATION=/usr/lib/spaceship-prompt/spaceship.zsh
-if [[ -z "${HOMEBREW_PREFIX}" ]]; then
+if [[ ! -z "${HOMEBREW_PREFIX+x}" ]]; then
     SPACESHIP_LOCATION="${HOMEBREW_PREFIX}/opt/spaceship/spaceship.zsh"
 fi
 source "${SPACESHIP_LOCATION}"
@@ -69,7 +69,7 @@ SPACESHIP_TIME_SHOW=true
 SPACESHIP_TIME_FORMAT="%D %T"
 SPACESHIP_DOCKER_SHOW=false
 
-if [[ -z "${HOMEBREW_PREFIX}" ]]; then
+if [[ ! -z "${HOMEBREW_PREFIX+x}" ]]; then
     ZSH_AUTOSUGGESTIONS="${HOMEBREW_PREFIX}/opt/zsh-autosuggestions/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
     ZSH_SYNTAX_HIGHHIGHTLING="${HOMEBREW_PREFIX}/opt/zsh-syntax-highlighting/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 else
@@ -112,7 +112,7 @@ fi
 # initialize pyenv
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
-if [ -z "${VIRTUAL_ENV}" ]; then
+if [ ! -z "${VIRTUAL_ENV+x}" ]; then
     eval "$(pyenv init --path)"
     eval "$(pyenv init -)"
 
@@ -135,7 +135,7 @@ fi
 # initialize fzf
 fzf_key_bindings=/usr/share/fzf/key-bindings.zsh
 fzf_completion=/usr/share/fzf/completion.zsh
-if [[ -z "${HOMEBREW_PREFIX}" ]]; then
+if [[ ! -z "${HOMEBREW_PREFIX+x}" ]]; then
     fzf_key_bindings="${HOMEBREW_PREFIX}"/opt/fzf/shell/key-bindings.zsh
     fzf_completion="${HOMEBREW_PREFIX}"/opt/fzf/shell/completion.zsh
 fi
