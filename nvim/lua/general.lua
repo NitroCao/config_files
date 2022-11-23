@@ -77,7 +77,7 @@ function _G.show_documentation()
     end
 end
 
-vim.g['coc_global_extensios'] = {
+vim.g['coc_global_extensions'] = {
     'coc-json',
     'coc-yaml',
     'coc-snippets',
