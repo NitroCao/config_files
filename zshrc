@@ -59,9 +59,11 @@ fi
 
 
 # initialize spaceship theme
-autoload -Uz promptinit; promptinit
-prompt spaceship
-compinit
+SPACESHIP_LOCATION=/usr/lib/spaceship-prompt/spaceship.zsh
+if [[ -z "${HOMEBREW_PREFIX}" ]]; then
+    SPACESHIP_LOCATION="${HOMEBREW_PREFIX}/opt/spaceship/spaceship.zsh"
+fi
+source "${SPACESHIP_LOCATION}"
 
 SPACESHIP_TIME_SHOW=true
 SPACESHIP_TIME_FORMAT="%D %T"
