@@ -78,6 +78,7 @@ function _G.show_documentation()
 end
 
 vim.g['coc_global_extensions'] = {
+    'coc-cmake',
     'coc-json',
     'coc-yaml',
     'coc-snippets',
