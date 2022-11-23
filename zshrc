@@ -67,8 +67,13 @@ SPACESHIP_TIME_SHOW=true
 SPACESHIP_TIME_FORMAT="%D %T"
 SPACESHIP_DOCKER_SHOW=false
 
-ZSH_AUTOSUGGESTIONS="${HOMEBREW_PREFIX}"/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-ZSH_SYNTAX_HIGHHIGHTLING="${HOMEBREW_PREFIX}"/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+if [[ -z "${HOMEBREW_PREFIX}" ]]; then
+    ZSH_AUTOSUGGESTIONS="${HOMEBREW_PREFIX}/opt/zsh-autosuggestions/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
+    ZSH_SYNTAX_HIGHHIGHTLING="${HOMEBREW_PREFIX}/opt/zsh-syntax-highlighting/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+else
+    ZSH_AUTOSUGGESTIONS=/usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+    ZSH_SYNTAX_HIGHHIGHTLING=/usr/share/zsh/plugins//zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+fi
 if [ -f "${ZSH_AUTOSUGGESTIONS}" ]; then
     source "${ZSH_AUTOSUGGESTIONS}"
 fi
