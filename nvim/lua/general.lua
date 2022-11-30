@@ -53,7 +53,6 @@ augroup END
 require('plugin.lualine')
 require('plugin.telescope')
 require('plugin.treesitter')
-require('plugin.coc')
 require('plugin.leaderf')
 require('plugin.vimgo')
 require('bufferline').setup{}
@@ -62,4 +61,5 @@ require('gitsigns').setup{}
 require('material').setup({
     lualine_style = 'default'
 })
+require('plugin.lsp')
 
