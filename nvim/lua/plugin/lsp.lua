@@ -89,5 +89,18 @@ cmp.setup {
     sources = {
         { name = 'nvim_lsp' },
         { name = 'luasnip' },
+        { name = 'nvim_lsp_signature_help' },
+        { name = 'path' },
+        { name = 'nvim_lua' }
     },
 }
+
+cmp.setup.cmdline('/', {
+    mapping = cmp.mapping.preset.cmdline(),
+    sources = cmp.config.sources({
+        { name = 'nvim_lsp_document_symbol' }
+    },
+    {
+        { name = 'buffer' }
+    })
+})
