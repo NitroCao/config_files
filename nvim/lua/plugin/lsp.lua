@@ -3,7 +3,7 @@ local lspconfig = require('lspconfig')
 local opts = { noremap = true, silent = true }
 
 local on_attach = function (client, bufnr)
-    -- local bufopts = { noremap = true, silent = true, buffer = bufnr }
+    local bufopts = { noremap = true, silent = true, buffer = bufnr }
     -- vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
     -- vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
     vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
@@ -17,6 +17,22 @@ local capabilities = require('cmp_nvim_lsp').default_capabilities()
 lspconfig.sumneko_lua.setup{
     capabilities = capabilities,
     on_attach = on_attach,
+    settings = {
+        Lua = {
+            runtime = {
+                version = 'LuaJIT'
+            },
+            diagnostics = {
+                globals = { 'vim' },
+            },
+            workspace = {
+                library = vim.api.nvim_get_runtime_file('', true)
+            },
+            telemetry = {
+                enable = false
+            }
+        }
+    }
 }
 lspconfig.rust_analyzer.setup{
     capabilities = capabilities,
