@@ -14,6 +14,34 @@ end
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
+lspconfig.rust_analyzer.setup{
+    capabilities = capabilities,
+    on_attach = on_attach,
+}
+lspconfig.bufls.setup{
+    capabilities = capabilities,
+    on_attach = on_attach,
+}
+lspconfig.bashls.setup{
+    capabilities = capabilities,
+    on_attach = on_attach,
+}
+lspconfig.dockerls.setup{
+    capabilities = capabilities,
+    on_attach = on_attach,
+}
+lspconfig.jsonls.setup{
+    capabilities = capabilities,
+    on_attach = on_attach,
+}
+lspconfig.yamlls.setup{
+    capabilities = capabilities,
+    on_attach = on_attach,
+}
+lspconfig.pyright.setup{
+    capabilities = capabilities,
+    on_attach = on_attach,
+}
 lspconfig.gopls.setup{
     capabilities = capabilities,
     on_attach = on_attach,
