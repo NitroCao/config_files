@@ -14,6 +14,10 @@ end
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
+lspconfig.sumneko_lua.setup{
+    capabilities = capabilities,
+    on_attach = on_attach,
+}
 lspconfig.rust_analyzer.setup{
     capabilities = capabilities,
     on_attach = on_attach,
