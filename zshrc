@@ -18,9 +18,6 @@ test -d /home/linuxbrew/.linuxbrew && \
 if command -v brew >/dev/null; then
     eval "$(brew shellenv)"
 fi
-if [ -z "${HOMEBREW_PREFIX+x}" ]; then
-    HOMEBREW_PREFIX=/usr
-fi
 
 # general environment variables
 export PATH=$HOME/.local/bin:$HOME/go/bin:$PATH
