@@ -1,2 +1,1 @@
-lua require('plugins')
-lua require('general')
+lua require('init')

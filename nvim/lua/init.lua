@@ -15,7 +15,6 @@ vim.o.updatetime = 100
 vim.o.signcolumn = 'yes'
 vim.o.matchpairs = vim.o.matchpairs .. ',<:>'
 vim.cmd('hi clear signcolumn')
-vim.cmd('colorscheme dracula')
 vim.o.cursorcolumn = true
 vim.o.termguicolors = true
 vim.wo.cursorline = true
@@ -25,11 +24,7 @@ vim.cmd([[
     hi CursorLineNr guifg=Red
 ]])
 
-if os.getenv('HOMEBREW_PREFIX') == nil then
-    vim.g.python3_host_prog = '/usr/bin/python3'
-else
-    vim.g.python3_host_prog = os.getenv('HOMEBREW_PREFIX') .. '/bin/python3'
-end
+vim.g.python3_host_prog = '/usr/bin/python3'
 
 vim.api.nvim_set_keymap('n', '<Leader>q', ':q<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<Leader>ww', ':w<CR>', { noremap = true, silent = true })
@@ -49,17 +44,17 @@ augroup group1
 augroup END
 ]])
 
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable", -- latest stable release
+    lazypath,
+  })
+end
+vim.opt.rtp:prepend(lazypath)
 
-require('plugin.lualine')
-require('plugin.telescope')
-require('plugin.treesitter')
-require('plugin.leaderf')
-require('plugin.vimgo')
-require('bufferline').setup{}
-require('Comment').setup{}
-require('gitsigns').setup{}
-require('material').setup({
-    lualine_style = 'default'
-})
-require('plugin.lsp')
-
+require('lazy').setup('plugins')
