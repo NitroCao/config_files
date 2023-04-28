@@ -93,7 +93,7 @@ function setup_pyenv() {
         eval "$(pyenv init --path)"
         eval "$(pyenv init -)"
 
-        if command -v virtualenv >/dev/null 2>&1; then
+        if command -v pyenv-virtualenv-init >/dev/null 2>&1; then
             eval "$(pyenv virtualenv-init -)"
         fi
     fi
