@@ -1,25 +1,3 @@
-OS_MAC="Darwin"
-OS_LINUX="Linux"
-OS_CENTOS="CentOS Linux"
-
-get_os() {
-    if [ -f /etc/os-release ]; then
-        source /etc/os-release
-    fi
-    if [ -n "${NAME}" ]; then
-        echo "${NAME}"
-    else
-        uname
-    fi
-}
-
-test -d /home/linuxbrew/.linuxbrew && \
-    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-if command -v brew >/dev/null; then
-    eval "$(brew shellenv)"
-fi
-
-# general environment variables
 export PATH=$HOME/.local/bin:$HOME/go/bin:$PATH
 export LANG=en_US.UTF-8
 export LC_ALL=$LANG
@@ -27,139 +5,139 @@ export TERM=xterm-256color
 # export HTTP_PROXY=http://127.0.0.1:1080
 # export HTTPS_PROXY=http://127.0.0.1:1080
 # export NO_PROXY=127.0.0.1,localhost
-if command -v nvim >/dev/null; then
-    export EDITOR=nvim
-elif command -v vim >/dev/null; then
-    export EDITOR=vim
-elif command -v vi >/dev/null; then
-    export EDITOR=vi
+
+if test -d /home/linuxbrew/.linuxbrew; then
+    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+elif test -d /opt/homebrew; then
+    eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 
+function brew_enabled() {
+    [[ ! -z "${HOMEBREW_PREFIX+x}" ]]
+}
 
-######################################################
-# initialize zsh related configuration
-if [ "$(get_os)" = "${OS_MAC}" ] || [ "$(get_os)" = "${OS_CENTOS}" ]; then
-    ZSH="${HOME}/.oh-my-zsh"
-else
-    ZSH="/usr/share/oh-my-zsh"
-fi
-
-plugins=(git z)
-
-source $ZSH/oh-my-zsh.sh
-
-# load extra zsh completions on macOS
-# install zsh-completions first
-if type brew &>/dev/null; then
-    FPATH="${HOMEBREW_PREFIX}"/share/zsh-completions:$FPATH
-fi
-
-
-# initialize spaceship theme
-SPACESHIP_LOCATION=/usr/lib/spaceship-prompt/spaceship.zsh
-if [[ ! -z "${HOMEBREW_PREFIX+x}" ]]; then
-    SPACESHIP_LOCATION="${HOMEBREW_PREFIX}/opt/spaceship/spaceship.zsh"
-fi
-source "${SPACESHIP_LOCATION}"
-
-SPACESHIP_TIME_SHOW=true
-SPACESHIP_TIME_FORMAT="%D %T"
-SPACESHIP_DOCKER_SHOW=false
-
-if [[ ! -z "${HOMEBREW_PREFIX+x}" ]]; then
-    ZSH_AUTOSUGGESTIONS="${HOMEBREW_PREFIX}/opt/zsh-autosuggestions/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
-    ZSH_SYNTAX_HIGHHIGHTLING="${HOMEBREW_PREFIX}/opt/zsh-syntax-highlighting/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
-else
-    ZSH_AUTOSUGGESTIONS=/usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-    ZSH_SYNTAX_HIGHHIGHTLING=/usr/share/zsh/plugins//zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-fi
-if [ -f "${ZSH_AUTOSUGGESTIONS}" ]; then
-    source "${ZSH_AUTOSUGGESTIONS}"
-fi
-if [ -f "${ZSH_SYNTAX_HIGHHIGHTLING}" ]; then
-    source "${ZSH_SYNTAX_HIGHHIGHTLING}"
-fi
-######################################################
-
-
-######################################################
-# initialize bat command
-if command -v bat >/dev/null; then
-    alias cat=bat
-    export MANPAGER="sh -c 'col -bx | bat -l man -p'"
-    export BAT_PAGER="less -RF"
-fi
-######################################################
-
-
-######################################################
-# initialize k8s-related commands
-if command -v kubectl >/dev/null; then
-    alias k=kubectl
-    source <(kubectl completion zsh)
-fi
-if command -v minikube >/dev/null; then
-    alias m=minikube
-    source <(minikube completion zsh)
-fi
-######################################################
-
-
-######################################################
-# initialize pyenv
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-if [ ! -z "${VIRTUAL_ENV+x}" ]; then
-    eval "$(pyenv init --path)"
-    eval "$(pyenv init -)"
-
-    if which virtualenv >/dev/null; then
-        eval "$(pyenv virtualenv-init -)"
+function setup_editor() {
+    if command -v nvim >/dev/null 2>&1; then
+        export EDITOR=nvim
+    elif command -v vim >/dev/null 2>&1; then
+        export EDITOR=vim
+    elif command -v vi >/dev/null 2>&1; then
+        export EDITOR=vi
     fi
-fi
-######################################################
+}
 
-
-######################################################
-# initialize jenv on macOS
-if command -v jenv >/dev/null; then
-    eval "$(jenv init -)"
-fi
-######################################################
-
-
-######################################################
-# initialize fzf
-fzf_key_bindings=/usr/share/fzf/key-bindings.zsh
-fzf_completion=/usr/share/fzf/completion.zsh
-if [[ ! -z "${HOMEBREW_PREFIX+x}" ]]; then
-    fzf_key_bindings="${HOMEBREW_PREFIX}"/opt/fzf/shell/key-bindings.zsh
-    fzf_completion="${HOMEBREW_PREFIX}"/opt/fzf/shell/completion.zsh
-fi
-
-source "${fzf_key_bindings}"
-source "${fzf_completion}"
-######################################################
-
-
-######################################################
-# initialize vcpkg
-if [ "$(get_os)" = "${OS_LINUX}" ]; then
-    source /opt/vcpkg/scripts/vcpkg_completion.zsh
-else
-    export VCPKG_ROOT="${HOME}/.vcpkg/vcpkg"
-fi
-######################################################
-
-
-######################################################
-# initialize Yubico SSH on macOS
-if command -v gpg-connect-agent >/dev/null; then
-    gpg-connect-agent /bye >/dev/null 2>&1
-    if [ "$(get_os)" = "${OS_MAC}" ]; then
-        export SSH_AUTH_SOCK=$HOME/.gnupg/S.gpg-agent.ssh
+function setup_omz() {
+    if test -d "${HOME}/.oh-my-zsh"; then
+        ZSH="${HOME}/.oh-my-zsh"
     else
-        export SSH_AUTH_SOCK=${XDG_RUNTIME_DIR}/gnupg/S.gpg-agent.ssh
+        ZSH="/usr/share/oh-my-zsh"
     fi
-fi
-######################################################
+
+    plugins=(git z)
+    source $ZSH/oh-my-zsh.sh
+
+    # load extra zsh completions on macOS
+    # install zsh-completions first
+    if brew_enabled; then
+        fpath+=("${HOMEBREW_PREFIX}/share/zsh/site-functions" "${HOMEBREW_PREFIX}/share/zsh-completions")
+    fi
+
+    autoload -U promptinit; promptinit
+    prompt pure
+
+    if brew_enabled; then
+        zsh_autosuggestions="${HOMEBREW_PREFIX}/opt/zsh-autosuggestions/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
+        zsh_syntax_highhightling="${HOMEBREW_PREFIX}/opt/zsh-syntax-highlighting/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+    else
+        zsh_autosuggestions=/usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+        zsh_syntax_highhightling=/usr/share/zsh/plugins//zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+    fi
+    if [ -f "${zsh_autosuggestions}" ]; then
+        source "${zsh_autosuggestions}"
+    fi
+    if [ -f "${zsh_syntax_highhightling}" ]; then
+        source "${zsh_syntax_highhightling}"
+    fi
+}
+
+function setup_bat() {
+    if command -v bat >/dev/null 2>&1; then
+        alias cat=bat
+        export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+        export BAT_PAGER="less -RF"
+    fi
+}
+
+function setup_kubectl() {
+    if command -v kubectl >/dev/null 2>&1; then
+        alias k=kubectl
+        source <(kubectl completion zsh)
+    fi
+}
+
+function setup_minikube() {
+    if command -v minikube >/dev/null 2>&1; then
+        alias m=minikube
+        source <(minikube completion zsh)
+    fi
+}
+
+function setup_pyenv() {
+    if ! command -v pyenv >/dev/null 2>&1; then
+        return
+    fi
+
+    export PYENV_ROOT="$HOME/.pyenv"
+    export PATH="$PYENV_ROOT/bin:$PATH"
+    if [ ! -z "${VIRTUAL_ENV+x}" ]; then
+        eval "$(pyenv init --path)"
+        eval "$(pyenv init -)"
+
+        if command -v virtualenv >/dev/null 2>&1; then
+            eval "$(pyenv virtualenv-init -)"
+        fi
+    fi
+}
+
+function setup_jenv() {
+    if command -v jenv >/dev/null 2>&1; then
+        eval "$(jenv init -)"
+    fi
+}
+
+setup_fzf() {
+    if ! command -v fzf >/dev/null 2>&1; then
+        return
+    fi
+
+    fzf_key_bindings=/usr/share/fzf/key-bindings.zsh
+    fzf_completion=/usr/share/fzf/completion.zsh
+    if brew_enabled; then
+        fzf_key_bindings="${HOMEBREW_PREFIX}"/opt/fzf/shell/key-bindings.zsh
+        fzf_completion="${HOMEBREW_PREFIX}"/opt/fzf/shell/completion.zsh
+    fi
+
+    source "${fzf_key_bindings}"
+    source "${fzf_completion}"
+}
+
+function setup_ssh_agent() {
+    if command -v gpg-connect-agent >/dev/null 2>&1; then
+        gpg-connect-agent /bye >/dev/null 2>&1
+        if brew_enabled; then
+            export SSH_AUTH_SOCK=$HOME/.gnupg/S.gpg-agent.ssh
+        else
+            export SSH_AUTH_SOCK=${XDG_RUNTIME_DIR}/gnupg/S.gpg-agent.ssh
+        fi
+    fi
+}
+
+setup_editor
+setup_omz
+setup_bat
+setup_kubectl
+setup_minikube
+setup_pyenv
+setup_jenv
+setup_fzf
+setup_ssh_agent
