@@ -26,7 +26,9 @@ return {
                 'coc-pairs',
                 'coc-go',
                 'coc-clangd',
-                'coc-pyright'
+                'coc-pyright',
+                'coc-docker',
+                'coc-sh'
             }
 
             vim.api.nvim_set_keymap('n', 'K', [[ <Cmd>lua show_documentation()<CR> ]], { noremap = true, silent = true })

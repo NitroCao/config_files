@@ -6,25 +6,5 @@
     "--line-length",
     "88"
   ],
-  "python.linting.pylintEnabled": true,
-  "languageserver": {
-    "bash": {
-      "command": "bash-language-server",
-      "filetypes": [
-        "sh"
-      ],
-      "args": [
-        "start"
-      ]
-    },
-    "dockerfile": {
-      "command": "docker-langserver",
-      "filetypes": [
-        "dockerfile"
-      ],
-      "args": [
-        "--stdio"
-      ]
-    }
-  }
+  "python.linting.pylintEnabled": true
 }
