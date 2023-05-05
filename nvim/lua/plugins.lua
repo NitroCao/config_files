@@ -1,5 +1,4 @@
 return {
-    { 'L3MON4D3/LuaSnip' },
     { 'nvim-tree/nvim-web-devicons' },
     { 'tpope/vim-surround' },
     { 'numToStr/Comment.nvim', lazy = false, config = function()

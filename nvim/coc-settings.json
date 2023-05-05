@@ -1,5 +1,7 @@
 {
   "coc.preferences.currentFunctionSymbolAutoUpdate": true,
+  "snippets.ultisnips.enable": false,
+  "snippets.priority": 100,
   "pyright.organizeimports.provider": "isort",
   "python.formatting.provider": "black",
   "python.formatting.blackArgs": [
