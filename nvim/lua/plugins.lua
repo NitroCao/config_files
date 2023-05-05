@@ -10,10 +10,18 @@ return {
         require('gitsigns').setup({})
     end },
     { 'honza/vim-snippets', lazy = false, },
-    { 'marko-cerovac/material.nvim', config = function()
-        lualine_style = 'default'
-        vim.g.material_style = 'darker'
-        vim.cmd 'colorscheme material'
+    { 'catppuccin/nvim', name = "catppuccin", config = function()
+        require('catppuccin').setup({
+            flavor = 'mocha',
+            no_italic = false,
+            no_bold = false,
+            integrations = {
+                gitsigns = true,
+                nvimtree = true,
+                telescope = true,
+            }
+        })
+        vim.cmd.colorscheme 'catppuccin'
     end },
 }
 

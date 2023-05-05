@@ -3,6 +3,7 @@ return {
         'neoclide/coc.nvim',
         branch = 'release',
         build = 'npm install',
+        dependencies = { 'fannheyward/telescope-coc.nvim'},
         config = function()
             -- options for coc.nvim
             function _G.check_back_space()
@@ -34,11 +35,11 @@ return {
             vim.api.nvim_set_keymap("i", "<cr>", [[coc#pum#visible() ? coc#pum#confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"]], { noremap = true, silent = true, expr = true })
             vim.api.nvim_set_keymap('n', 'g[', '<Plug>(coc-diagnostic-prev)', { silent = true })
             vim.api.nvim_set_keymap('n', 'g]', '<Plug>(coc-diagnostic-next)', { silent = true })
-            vim.api.nvim_set_keymap('n', 'gd', '<Plug>(coc-definition)', {})
-            vim.api.nvim_set_keymap('n', 'gt', '<Plug>(coc-type-definition)', {})
-            vim.api.nvim_set_keymap('n', 'gi', '<Plug>(coc-implementation)', {})
-            vim.api.nvim_set_keymap('n', 'gn', '<Plug>(coc-rename)', {})
-            vim.api.nvim_set_keymap('n', 'gr', '<Plug>(coc-references)', {})
+            vim.api.nvim_set_keymap('n', '<Leader>gd', ':Telescope coc definitions<CR>', {})
+            vim.api.nvim_set_keymap('n', '<Leader>gD', ':Telescope coc type-definitions<CR>', {})
+            vim.api.nvim_set_keymap('n', '<Leader>gi', ':Telescope coc implementations<CR>', {})
+            vim.api.nvim_set_keymap('n', '<Leader>gn', '<Plug>(coc-rename)', {})
+            vim.api.nvim_set_keymap('n', '<Leader>gr', ':Telescope coc references<CR>', {})
         end
     }
 }
