@@ -8,5 +8,13 @@
     "--line-length",
     "88"
   ],
-  "python.linting.pylintEnabled": true
+  "python.linting.pylintEnabled": true,
+  "yaml.completion": true,
+  "yaml.format.enable": true,
+  "yaml.schemaStore.enable": true,
+  "yaml.schemas": {
+    "kubernetes": [
+      "/*.yaml"
+    ]
+  }
 }
