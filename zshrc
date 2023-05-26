@@ -129,6 +129,15 @@ function setup_ssh_agent() {
     fi
 }
 
+tw() {
+    [[ -n "$TMUX" ]] && change="switch-client" || change="attach-session"
+    if [ $1 ]; then
+        echo "Please specify target window"
+        return
+    fi
+    window=$(tmux select-pane -m && tmux list-windows -aF '#{window_id};#{window_name};#{session_name}' 2>/dev/null | fzf --exit-0 | cut -d';' -f1) && tmux $change -t "$window"
+}
+
 setup_editor
 setup_omz
 setup_bat
