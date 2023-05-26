@@ -135,7 +135,7 @@ tw() {
         echo "Please specify target window"
         return
     fi
-    window=$(tmux select-pane -m && tmux list-windows -aF '#{window_id};#{window_name};#{session_name}' 2>/dev/null | fzf --exit-0 | cut -d';' -f1) && tmux $change -t "$window"
+    window=$(tmux select-pane -M && tmux select-pane -m && tmux list-windows -aF '#{window_id};#{window_name};#{session_name}' 2>/dev/null | fzf --exit-0 | cut -d';' -f1) && tmux $change -t "$window"
 }
 
 setup_editor
