@@ -32,6 +32,12 @@ vim.api.nvim_set_keymap('n', '<Leader>x', ':x<CR>', { noremap = true, silent = t
 vim.api.nvim_set_keymap('n', '<C-n>', ':bn<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<C-p>', ':bp<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<Leader>bd', ':bd<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('c', '<C-a>', '<Home>', { noremap = true })
+vim.api.nvim_set_keymap('c', '<C-e>', '<End>', { noremap = true })
+vim.api.nvim_set_keymap('c', '<C-f>', '<Right>', { noremap = true })
+vim.api.nvim_set_keymap('c', '<C-b>', '<Left>', { noremap = true })
+vim.api.nvim_set_keymap('c', '<M-b>', '<S-Left>', { noremap = true })
+vim.api.nvim_set_keymap('c', '<M-f>', '<S-Right>', { noremap = true })
 
 vim.cmd([[
 augroup group1
