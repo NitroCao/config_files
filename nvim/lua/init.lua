@@ -13,7 +13,7 @@ vim.o.showmode = false
 vim.o.wrap = true
 vim.o.updatetime = 100
 vim.o.signcolumn = 'yes'
-vim.o.matchpairs = vim.o.matchpairs .. ',<:>'
+vim.o.matchpairs = vim.o.matchpairs .. ',<:>,(:),[:],{:},.:.'
 vim.cmd('hi clear signcolumn')
 vim.o.cursorcolumn = true
 vim.o.termguicolors = true
