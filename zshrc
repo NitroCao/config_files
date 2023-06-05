@@ -129,6 +129,12 @@ function setup_ssh_agent() {
     fi
 }
 
+setup_helm() {
+    if command -v helm >/dev/null 2>&1; then
+        source <(helm completion zsh)
+    fi
+}
+
 tw() {
     [[ -n "$TMUX" ]] && change="switch-client" || change="attach-session"
     if [ $1 ]; then
@@ -147,3 +153,4 @@ setup_pyenv
 setup_jenv
 setup_fzf
 setup_ssh_agent
+setup_helm
