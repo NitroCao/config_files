@@ -65,6 +65,7 @@ function setup_bat() {
         alias cat=bat
         export MANPAGER="sh -c 'col -bx | bat -l man -p'"
         export BAT_PAGER="less -RF"
+        export BAT_THEME=Dracula
     fi
 }
 
