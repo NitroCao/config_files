@@ -49,9 +49,14 @@ return {
                 'coc-clangd',
                 'coc-pyright',
                 'coc-docker',
-                'coc-sh'
+                'coc-sh',
+                '@yaegassy/coc-ansible',
+            }
+            vim.g['coc_filetype_map'] = {
+                ['yaml.ansible'] = 'ansible',
             }
 
+            vim.api.nvim_set_keymap('n', '<Leader>gc', ':CocCommand<CR>', {})
             vim.api.nvim_set_keymap('n', 'K', [[ <Cmd>lua show_documentation()<CR> ]], { noremap = true, silent = true })
             vim.api.nvim_set_keymap("i", "<TAB>", 'coc#pum#visible() ? coc#pum#next(1) : v:lua.check_back_space() ? "<TAB>" : coc#refresh()', { noremap = true, silent = true, expr = true })
             vim.api.nvim_set_keymap("i", "<S-TAB>", [[coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"]], { noremap = true, silent = true, expr = true })

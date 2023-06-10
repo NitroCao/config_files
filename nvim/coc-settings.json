@@ -12,10 +12,5 @@
   "python.linting.pylintEnabled": true,
   "yaml.completion": true,
   "yaml.format.enable": true,
-  "yaml.schemaStore.enable": true,
-  "yaml.schemas": {
-    "kubernetes": [
-      "/*.yaml"
-    ]
-  }
+  "yaml.schemaStore.enable": true
 }

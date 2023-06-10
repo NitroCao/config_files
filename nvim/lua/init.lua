@@ -18,6 +18,7 @@ vim.cmd('hi clear signcolumn')
 vim.o.cursorcolumn = true
 vim.o.termguicolors = true
 vim.wo.cursorline = true
+vim.o.exrc = true
 vim.cmd([[
     hi clear CursorLine
     hi clear SignColumn
