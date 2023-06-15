@@ -2,9 +2,6 @@ export PATH=$HOME/.local/bin:$HOME/go/bin:$PATH
 export LANG=en_US.UTF-8
 export LC_ALL=$LANG
 export TERM=xterm-256color
-# export HTTP_PROXY=http://127.0.0.1:1080
-# export HTTPS_PROXY=http://127.0.0.1:1080
-# export NO_PROXY=127.0.0.1,localhost
 
 if test -d /home/linuxbrew/.linuxbrew; then
     eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
@@ -145,6 +142,13 @@ tw() {
     window=$(tmux select-pane -M && tmux select-pane -m && tmux list-windows -aF '#{window_id};#{window_name};#{session_name}' 2>/dev/null | fzf --exit-0 | cut -d';' -f1) && tmux $change -t "$window"
 }
 
+setup_custom() {
+    CUSTOM_ZSHRC="$HOME/.zshrc-custom"
+    if [[ -f "$CUSTOM_ZSHRC" ]]; then
+        source "$CUSTOM_ZSHRC"
+    fi
+}
+
 setup_editor
 setup_omz
 setup_bat
@@ -155,3 +159,5 @@ setup_jenv
 setup_fzf
 setup_ssh_agent
 setup_helm
+
+setup_custom
