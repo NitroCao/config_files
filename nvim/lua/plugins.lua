@@ -17,7 +17,6 @@ return {
             integrations = {
                 gitsigns = true,
                 nvimtree = true,
-                telescope = true,
             }
         })
         vim.cmd.colorscheme 'catppuccin'

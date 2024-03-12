@@ -1,7 +1,7 @@
 {
   "coc.preferences.currentFunctionSymbolAutoUpdate": true,
   "snippets.ultisnips.enable": false,
-  "snippets.priority": 100,
+  "snippets.priority": -1,
   "outline.splitCommand": "topleft 30vs",
   "pyright.organizeimports.provider": "isort",
   "python.formatting.provider": "black",

@@ -12,7 +12,8 @@ return {
                 file = {'*.o', '*.so', '*.py[co]'}
             }
             vim.api.nvim_set_keymap('n', '<Leader>lF', ':LeaderfFunction<CR>', { noremap = true, silent = true })
-            vim.api.nvim_set_keymap('n', '<leader>lf', ':LeaderfFile<CR>', { noremap = true, silent = true})
+            vim.api.nvim_set_keymap('n', '<leader>lf', ':LeaderfFile<CR>', { noremap = true, silent = true })
+            vim.api.nvim_set_keymap('n', '<leader>lb', ':LeaderfBuffer<CR>', { noremap = true, silent = true })
             vim.api.nvim_set_keymap('n', '<Leader>ltr', ':<C-U><C-R>=printf("Leaderf gtags -r %s --auto-jump", expand("<cword>"))<CR><CR>', { noremap = true, silent = true })
             vim.api.nvim_set_keymap('n', '<Leader>ltd', ':<C-U><C-R>=printf("Leaderf gtags --auto-jump -d %s", expand("<cword>"))<CR>', { noremap = true, silent = true })
         end
