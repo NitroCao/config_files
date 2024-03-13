@@ -43,7 +43,6 @@ return {
                 'coc-json',
                 'coc-yaml',
                 'coc-snippets',
-                'coc-pairs',
                 'coc-go',
                 'coc-clangd',
                 'coc-pyright',
