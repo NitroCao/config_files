@@ -34,18 +34,22 @@ return {
                         goto_next_start = {
                             ["]f"] = "@function.outer",
                             ["]c"] = "@conditional.outer",
+                            ["]p"] = "@parameter.outer",
                         },
                         goto_next_end = {
                             ["]F"] = "@function.outer",
                             ["]C"] = "@conditional.outer",
+                            ["]P"] = "@parameter.outer",
                         },
                         goto_previous_start = {
                             ["[f"] = "@function.outer",
                             ["[c"] = "@conditional.outer",
+                            ["[p"] = "@parameter.outer",
                         },
                         goto_previous_end = {
                             ["[F"] = "@function.outer",
                             ["[C"] = "@conditional.outer",
+                            ["[P"] = "@parameter.outer",
                         }
                     }
                 }
