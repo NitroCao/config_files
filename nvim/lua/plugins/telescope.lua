@@ -20,11 +20,12 @@ return {
             vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
             vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
             vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
+            vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
 
             telescope.setup({
                 extensions = {
                     coc = {
-                        theme = 'ivy',
+                        theme = 'dropdown',
                         prefer_locations = false,
                         push_cursor_on_edit = true,
                     },
