@@ -12,5 +12,20 @@
   "python.linting.pylintEnabled": true,
   "yaml.completion": true,
   "yaml.format.enable": true,
-  "yaml.schemaStore.enable": true
+  "yaml.schemaStore.enable": true,
+  "sumneko-lua.enableNvimLuaDev": true,
+  "languageserver": {
+    "cmake": {
+      "command": "cmake-language-server",
+      "filetypes": [
+        "cmake"
+      ],
+      "rootPatterns": [
+        ".git"
+      ],
+      "initializationOptions": {
+        "buildDirectory": ".build"
+      }
+    }
+  }
 }
