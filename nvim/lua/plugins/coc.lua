@@ -47,7 +47,7 @@ return {
                 'coc-pyright',
                 'coc-docker',
                 'coc-sh',
-                '@yaegassy/coc-ansible',
+                'coc-tsserver',
             }
             vim.g['coc_filetype_map'] = {
                 ['yaml.ansible'] = 'ansible',
@@ -60,6 +60,7 @@ return {
             vim.api.nvim_set_keymap("i", "<cr>", [[coc#pum#visible() ? coc#pum#confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"]], { noremap = true, silent = true, expr = true })
             vim.api.nvim_set_keymap('n', '<Leader>g[', '<Plug>(coc-diagnostic-prev)', { silent = true })
             vim.api.nvim_set_keymap('n', '<Leader>g]', '<Plug>(coc-diagnostic-next)', { silent = true })
+            vim.api.nvim_set_keymap('n', '<Leader>fF', ':Telescope coc document_symbols<CR>', { silent = true })
             vim.api.nvim_set_keymap('n', '<Leader>gd', ':Telescope coc definitions<CR>', {})
             vim.api.nvim_set_keymap('n', '<Leader>gD', ':Telescope coc type-definitions<CR>', {})
             vim.api.nvim_set_keymap('n', '<Leader>gi', ':Telescope coc implementations<CR>', {})

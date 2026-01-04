@@ -12,6 +12,8 @@ return {
                     'dockerfile',
                     'go',
                     'gomod',
+                    'java',
+                    'javascript',
                     'json',
                     'json5',
                     'jsonc',
