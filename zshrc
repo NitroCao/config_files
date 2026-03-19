@@ -152,6 +152,10 @@ setup_custom() {
     fi
 }
 
+preexec() {
+    echo -n "\\x1b]133;A\\x1b\\"
+}
+
 setup_editor
 setup_omz
 setup_bat
