@@ -24,7 +24,7 @@ function setup_editor() {
 }
 
 function setup_omz() {
-    if test -d "${HOME}/.oh-my-zsh"; then
+    if [ -d "${HOME}/.oh-my-zsh" ]; then
         ZSH="${HOME}/.oh-my-zsh"
     else
         ZSH="/usr/share/oh-my-zsh"
@@ -83,20 +83,6 @@ function setup_minikube() {
     fi
 }
 
-function setup_pyenv() {
-    if ! command -v pyenv >/dev/null 2>&1; then
-        return
-    fi
-
-    export PYENV_ROOT="$HOME/.pyenv"
-    export PATH="$PYENV_ROOT/bin:$PATH"
-    eval "$(pyenv init -)"
-
-    if command -v pyenv-virtualenv-init >/dev/null 2>&1; then
-        eval "$(pyenv virtualenv-init -)"
-    fi
-}
-
 function setup_jenv() {
     if command -v jenv >/dev/null 2>&1; then
         eval "$(jenv init -)"
@@ -108,15 +94,7 @@ setup_fzf() {
         return
     fi
 
-    fzf_key_bindings=/usr/share/fzf/key-bindings.zsh
-    fzf_completion=/usr/share/fzf/completion.zsh
-    if brew_enabled; then
-        fzf_key_bindings="${HOMEBREW_PREFIX}"/opt/fzf/shell/key-bindings.zsh
-        fzf_completion="${HOMEBREW_PREFIX}"/opt/fzf/shell/completion.zsh
-    fi
-
-    source "${fzf_key_bindings}"
-    source "${fzf_completion}"
+    source <(fzf --zsh)
 }
 
 function setup_ssh_agent() {
@@ -161,7 +139,6 @@ setup_omz
 setup_bat
 setup_kubectl
 setup_minikube
-setup_pyenv
 setup_jenv
 setup_fzf
 setup_ssh_agent
