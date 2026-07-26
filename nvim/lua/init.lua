@@ -46,8 +46,8 @@ vim.cmd([[
 augroup group1
     autocmd!
 
-    autocmd FileType yaml,json setlocal shiftwidth=2 softtabstop=2 tabstop=2
-    autocmd BufWritePre *.java,*.py,*.go,*.json,*.yml,*.yaml :silent! call CocActionAsync('format')
+    autocmd FileType yaml setlocal shiftwidth=2 softtabstop=2 tabstop=2
+    autocmd BufWritePre *.java,*.py,*.go,*.yml,*.yaml :silent! call CocActionAsync('format')
     autocmd BufWritePre *.java,*.go,*.py :silent! call CocActionAsync('runCommand', 'editor.action.organizeImport')
     autocmd BufWritePre *.py :silent! call CocActionAsync('runCommand', 'python.sortImports')
 augroup END
@@ -73,3 +73,5 @@ require('lazy').setup('plugins', {
         }
     }
 })
+
+require('config.json').setup()
