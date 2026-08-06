@@ -40,7 +40,7 @@ return {
                     },
                     project = {
                         base_dirs = {
-                            { path = '~/Development', max_depth = 2 }
+                            { path = '~/dev', max_depth = 2 }
                         },
                         hidden_files = true,
                         theme = 'dropdown',

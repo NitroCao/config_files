@@ -44,7 +44,7 @@ return {
                 'coc-snippets',
                 'coc-go',
                 'coc-clangd',
-                'coc-pyright',
+                '@yaegassy/coc-ty',
                 'coc-docker',
                 'coc-sh',
                 'coc-tsserver',
