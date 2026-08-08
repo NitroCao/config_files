@@ -14,6 +14,7 @@ vim.o.undofile = true
 vim.o.showmode = false
 vim.o.wrap = true
 vim.o.updatetime = 100
+vim.o.hidden = true
 vim.o.signcolumn = 'yes'
 vim.o.matchpairs = vim.o.matchpairs .. ',<:>,(:),[:],{:},.:.'
 vim.cmd('hi clear signcolumn')
@@ -29,18 +30,18 @@ vim.cmd([[
 
 vim.g.python3_host_prog = '/usr/bin/python3'
 
-vim.api.nvim_set_keymap('n', '<Leader>q', ':q<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<Leader>ww', ':w<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<Leader>x', ':x<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<C-n>', ':bn<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<C-p>', ':bp<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<Leader>bd', ':bd<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('c', '<C-a>', '<Home>', { noremap = true })
-vim.api.nvim_set_keymap('c', '<C-e>', '<End>', { noremap = true })
-vim.api.nvim_set_keymap('c', '<C-f>', '<Right>', { noremap = true })
-vim.api.nvim_set_keymap('c', '<C-b>', '<Left>', { noremap = true })
-vim.api.nvim_set_keymap('c', '<M-b>', '<S-Left>', { noremap = true })
-vim.api.nvim_set_keymap('c', '<M-f>', '<S-Right>', { noremap = true })
+vim.keymap.set('n', '<Leader>q', ':q<CR>', { silent = true, desc = 'Quit' })
+vim.keymap.set('n', '<Leader>ww', ':w<CR>', { silent = true, desc = 'Save' })
+vim.keymap.set('n', '<Leader>x', ':x<CR>', { silent = true, desc = 'Save and quit' })
+vim.keymap.set('n', '<C-n>', ':bn<CR>', { silent = true, desc = 'Next buffer' })
+vim.keymap.set('n', '<C-p>', ':bp<CR>', { silent = true, desc = 'Previous buffer' })
+vim.keymap.set('n', '<Leader>bd', ':bd<CR>', { silent = true, desc = 'Delete buffer' })
+vim.keymap.set('c', '<C-a>', '<Home>')
+vim.keymap.set('c', '<C-e>', '<End>')
+vim.keymap.set('c', '<C-f>', '<Right>')
+vim.keymap.set('c', '<C-b>', '<Left>')
+vim.keymap.set('c', '<M-b>', '<S-Left>')
+vim.keymap.set('c', '<M-f>', '<S-Right>')
 
 vim.cmd([[
 augroup group1

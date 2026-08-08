@@ -1,6 +1,9 @@
 return {
     { 'nvim-tree/nvim-web-devicons' },
-    { 'tpope/vim-surround' },
+    { 'kylechui/nvim-surround',
+        version = "^4.0.0",
+        event = "VeryLazy",
+    },
     { 'numToStr/Comment.nvim', lazy = false, config = function()
         require('Comment').setup({})
     end

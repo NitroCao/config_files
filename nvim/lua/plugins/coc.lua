@@ -33,7 +33,7 @@ return {
             function _G.show_documentation()
                 if vim.fn['coc#rpc#ready']() == 1 then
                     vim.fn['CocActionAsync']('doHover')
-                elseif { 'vim', 'help' } ~= vim.o.filetype then
+                elseif vim.tbl_contains({ 'vim', 'help' }, vim.o.filetype) then
                     vim.cmd('h ' .. vim.fn.expand('<cword>'))
                 end
             end
@@ -48,26 +48,31 @@ return {
                 'coc-docker',
                 'coc-sh',
                 'coc-tsserver',
+                'coc-markdownlint',
             }
             vim.g['coc_filetype_map'] = {
                 ['yaml.ansible'] = 'ansible',
             }
 
-            vim.api.nvim_set_keymap('n', '<Leader>c', ':CocCommand<CR>', {})
-            vim.api.nvim_set_keymap('n', 'K', [[ <Cmd>lua show_documentation()<CR> ]], { noremap = true, silent = true })
-            vim.api.nvim_set_keymap("i", "<TAB>", 'coc#pum#visible() ? coc#pum#next(1) : v:lua.check_back_space() ? "<TAB>" : coc#refresh()', { noremap = true, silent = true, expr = true })
-            vim.api.nvim_set_keymap("i", "<S-TAB>", [[coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"]], { noremap = true, silent = true, expr = true })
-            vim.api.nvim_set_keymap("i", "<cr>", [[coc#pum#visible() ? coc#pum#confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"]], { noremap = true, silent = true, expr = true })
-            vim.api.nvim_set_keymap('n', '<Leader>g[', '<Plug>(coc-diagnostic-prev)', { silent = true })
-            vim.api.nvim_set_keymap('n', '<Leader>g]', '<Plug>(coc-diagnostic-next)', { silent = true })
-            vim.api.nvim_set_keymap('n', '<Leader>fF', ':Telescope coc document_symbols<CR>', { silent = true })
-            vim.api.nvim_set_keymap('n', '<Leader>gd', ':Telescope coc definitions<CR>', {})
-            vim.api.nvim_set_keymap('n', '<Leader>gD', ':Telescope coc type-definitions<CR>', {})
-            vim.api.nvim_set_keymap('n', '<Leader>gi', ':Telescope coc implementations<CR>', {})
-            vim.api.nvim_set_keymap('n', '<Leader>gr', ':Telescope coc references<CR>', {})
-            vim.api.nvim_set_keymap('n', '<Leader>gn', '<Plug>(coc-rename)', {})
-            vim.api.nvim_set_keymap('n', '<Leader>gci', ': call CocAction("showIncomingCalls")', {})
-            vim.api.nvim_set_keymap('n', '<Leader>gco', 'call CocAction("showOutgoingCalls")', {})
+            vim.keymap.set('n', '<Leader>c', ':CocCommand<CR>', { silent = true, desc = 'CocCommand' })
+            vim.keymap.set('n', 'K', _G.show_documentation, { silent = true, desc = 'Hover documentation' })
+            vim.keymap.set("i", "<TAB>", 'coc#pum#visible() ? coc#pum#next(1) : v:lua.check_back_space() ? "<TAB>" : coc#refresh()', { expr = true, silent = true })
+            vim.keymap.set("i", "<S-TAB>", [[coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"]], { expr = true, silent = true })
+            vim.keymap.set("i", "<cr>", [[coc#pum#visible() ? coc#pum#confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"]], { expr = true, silent = true })
+            vim.keymap.set('n', '[g', '<Plug>(coc-diagnostic-prev)', { silent = true, desc = 'Previous diagnostic' })
+            vim.keymap.set('n', ']g', '<Plug>(coc-diagnostic-next)', { silent = true, desc = 'Next diagnostic' })
+            vim.keymap.set('n', '<Leader>fs', ':Telescope coc document_symbols<CR>', { silent = true, desc = 'Document symbols' })
+            vim.keymap.set('n', '<Leader>gd', ':Telescope coc definitions<CR>', { silent = true, desc = 'Go to definition' })
+            vim.keymap.set('n', '<Leader>gD', ':Telescope coc type-definitions<CR>', { silent = true, desc = 'Go to type definition' })
+            vim.keymap.set('n', '<Leader>gi', ':Telescope coc implementations<CR>', { silent = true, desc = 'Go to implementation' })
+            vim.keymap.set('n', '<Leader>gr', ':Telescope coc references<CR>', { silent = true, desc = 'Find references' })
+            vim.keymap.set('n', '<Leader>gn', '<Plug>(coc-rename)', { silent = true, desc = 'Rename symbol' })
+            vim.keymap.set('n', '<Leader>gci', function()
+                vim.fn.CocActionAsync('showIncomingCalls')
+            end, { silent = true, desc = 'Show incoming calls' })
+            vim.keymap.set('n', '<Leader>gco', function()
+                vim.fn.CocActionAsync('showOutgoingCalls')
+            end, { silent = true, desc = 'Show outgoing calls' })
         end
     }
 }
