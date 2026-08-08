@@ -5,6 +5,7 @@
   "coc.nvim": { "branch": "release", "commit": "4b71301cf39ba469e738aafeffb0eb6dc344f54a" },
   "codesnap.nvim": { "branch": "main", "commit": "21b7561c95cc452c65ddf2fc4dfeb280f8471d45" },
   "dashboard-nvim": { "branch": "master", "commit": "f787e3462c2ee2b6117b17c1aa4ddf66cb6f57fe" },
+  "diffview.nvim": { "branch": "main", "commit": "4516612fe98ff56ae0415a259ff6361a89419b0a" },
   "gitsigns.nvim": { "branch": "main", "commit": "31d6fb2d618bca1482b9f274751ead5f03461408" },
   "indent-blankline.nvim": { "branch": "master", "commit": "d28a3f70721c79e3c5f6693057ae929f3d9c0a03" },
   "lazy.nvim": { "branch": "main", "commit": "306a05526ada86a7b30af95c5cc81ffba93fef97" },

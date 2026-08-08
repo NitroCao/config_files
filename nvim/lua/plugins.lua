@@ -49,6 +49,7 @@ return {
             end,
             integrations = {
                 gitsigns = true,
+                diffview = true,
                 nvimtree = true,
                 telescope = {
                     enabled = true,
