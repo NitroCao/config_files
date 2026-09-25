@@ -13,7 +13,7 @@ return {
             'debugloop/telescope-undo.nvim',
         },
         lazy = false,
-        version = '0.1.6',
+        version = '*',
         config = function()
             local telescope = require('telescope')
             local builtin = require('telescope.builtin')
